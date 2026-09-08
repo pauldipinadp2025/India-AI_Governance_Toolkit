@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India AI Governance Toolkit | DPDP Readiness</title>
+<meta name="description" content="Learn India's data protection framework, assess which DPDP obligations apply to your product, and generate a draft privacy notice. Runs entirely in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#F4F6F7; --surface:#FFFFFF; --ink:#151C26; --ink2:#26313F;
+  --inkSoft:#5B6674; --inkFaint:#8B95A3;
+  --line:#DEE3E8; --lineSoft:#EDF0F3;
+  --accent:#2F5D62; --accent2:#3F7C7A; --accentSoft:#E9F1F1;
+  --critical:#9B3A2F; --criticalSoft:#F9EDEB;
+  --attention:#A96C0E; --attentionSoft:#FCF3E4;
+  --clear:#2C6B4F; --clearSoft:#EAF3EE;
+  --shadow:0 1px 2px rgba(21,28,38,.04), 0 4px 16px rgba(21,28,38,.05);
+  --shadowUp:0 2px 6px rgba(21,28,38,.07), 0 12px 32px rgba(21,28,38,.09);
+  --maxw:960px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--base);color:var(--ink);
+  font-family:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+h1,h2,h3,h4{font-family:'Newsreader',serif;font-weight:600;margin:0;letter-spacing:-.01em;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+::selection{background:var(--accent);color:#fff;}
+.prose{text-align:justify;hyphens:auto;-webkit-hyphens:auto;}
+
+.nav{position:sticky;top:0;z-index:50;background:rgba(21,28,38,.97);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.07);}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:20px;}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;flex:0 0 auto;}
+.brand .mark{width:26px;height:26px;flex:0 0 auto;}
+.brand .nm{font-family:'Newsreader',serif;font-size:16.5px;font-weight:600;white-space:nowrap;}
+.navtabs{display:flex;gap:2px;}
+.navtab{border:none;background:transparent;color:#95A1B0;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:500;padding:7px 13px;border-radius:7px;transition:color .15s,background .15s;white-space:nowrap;}
+.navtab:hover{color:#D5DCE4;background:rgba(255,255,255,.05);}
+.navtab.on{color:var(--ink);background:var(--base);font-weight:600;}
+
+.hero{background:linear-gradient(168deg,#151C26 0%,#1E2A38 58%,#22363B 100%);color:#E8ECF1;position:relative;overflow:hidden;}
+.hero .wrap{position:relative;z-index:2;padding-top:58px;padding-bottom:58px;display:grid;grid-template-columns:1fr 290px;gap:44px;align-items:center;}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#7FB3AE;margin-bottom:15px;}
+.hero .eyebrow::before{content:'';width:20px;height:1px;background:#7FB3AE;}
+.hero h1{font-size:clamp(31px,4.4vw,45px);line-height:1.1;color:#fff;margin-bottom:16px;}
+.hero h1 em{font-style:normal;color:#8FC4BE;}
+.hero p{font-size:16px;color:#AEB9C6;max-width:52ch;margin:0 0 26px;}
+.heroart{width:100%;height:auto;}
+.herostats{display:flex;gap:28px;flex-wrap:wrap;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);}
+.hstat .v{font-family:'Newsreader',serif;font-size:23px;font-weight:600;color:#fff;line-height:1.1;}
+.hstat .l{font-size:11.5px;color:#8B97A6;margin-top:3px;}
+.grid-bg{position:absolute;inset:0;z-index:1;}
+
+main{padding-bottom:0;}
+.panel{display:none;} .panel.on{display:block;animation:fade .3s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.section{padding:44px 0;border-bottom:1px solid var(--line);}
+.section:last-child{border-bottom:none;}
+.sechead{display:flex;align-items:flex-start;gap:16px;margin-bottom:8px;}
+.secicon{width:38px;height:38px;flex:0 0 auto;margin-top:2px;}
+.sectitles{flex:1;min-width:0;}
+.secnum{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:var(--accent);letter-spacing:.11em;margin-bottom:3px;}
+.sectitle{font-size:25px;line-height:1.2;}
+.lede{font-size:15px;color:var(--inkSoft);margin:0 0 22px;max-width:66ch;}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:var(--shadow);}
+.boxlist{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);}
+
+.seg{display:inline-flex;gap:3px;background:var(--lineSoft);border-radius:9px;padding:3px;margin-bottom:18px;}
+.seg button{border:none;border-radius:7px;padding:9px 20px;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;background:transparent;color:var(--inkSoft);transition:all .18s;}
+.seg button:hover{color:var(--ink);}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow);}
+.concept{display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:start;}
+.concept .ic{width:64px;height:64px;}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accentSoft);padding:4px 11px;border-radius:20px;margin-bottom:11px;}
+
+.sutras{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:11px;}
+.sutra{text-align:left;cursor:pointer;border:1px solid var(--ink2);border-radius:11px;padding:16px;min-height:130px;font-family:inherit;background:var(--ink);color:#fff;transition:transform .18s,box-shadow .18s,background .18s;display:flex;flex-direction:column;}
+.sutra:hover{transform:translateY(-3px);box-shadow:var(--shadowUp);}
+.sutra.flip{background:var(--accentSoft);color:var(--ink);border-color:var(--accent2);}
+.sutra .n{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#7FB3AE;font-weight:500;letter-spacing:.08em;}
+.sutra .nm{font-size:15px;font-weight:600;line-height:1.28;margin-top:auto;}
+.sutra .gl{font-size:12.5px;line-height:1.5;margin:auto 0;}
+.sutra .shint{font-size:10.5px;color:#6D7D8C;margin-top:7px;}
+
+.tl{position:relative;padding-left:30px;}
+.tl::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--accent),var(--line));}
+.tl-i{position:relative;padding-bottom:26px;}
+.tl-i:last-child{padding-bottom:0;}
+.tl-i::before{content:'';position:absolute;left:-30px;top:5px;width:14px;height:14px;border-radius:7px;background:var(--accent);border:3px solid var(--base);box-shadow:0 0 0 1px var(--accent);}
+.tl-i.future::before{background:var(--base);box-shadow:0 0 0 1px var(--attention);}
+.tl-w{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--accent);font-weight:500;letter-spacing:.04em;}
+.tl-i.future .tl-w{color:var(--attention);}
+.tl-t{font-family:'Newsreader',serif;font-size:17.5px;font-weight:600;margin:3px 0;}
+.tl-n{font-size:13.5px;color:var(--inkSoft);max-width:62ch;}
+
+.row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px 20px;border-top:1px solid var(--lineSoft);transition:background .15s;}
+.row:first-child{border-top:none;}
+.row:hover{background:var(--base);}
+.row .amt{font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--critical);white-space:nowrap;}
+
+.q{margin-bottom:26px;}
+.q>label{display:block;font-size:14.5px;font-weight:600;margin-bottom:3px;}
+.q .hint{font-size:12.5px;color:var(--inkFaint);margin-bottom:10px;}
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--inkSoft);border-radius:8px;padding:8px 13px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:500;transition:all .15s;}
+.chip:hover{border-color:var(--accent2);color:var(--ink);}
+.chip.on{border-color:var(--accent);background:var(--accent);color:#fff;}
+.chip.sens.on{border-color:var(--attention);background:var(--attention);}
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:9px;}
+.check{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:9px;padding:12px 13px;cursor:pointer;background:var(--surface);transition:all .15s;}
+.check:hover{border-color:var(--clear);}
+.check.on{border-color:var(--clear);background:var(--clearSoft);}
+.check input{margin:3px 0 0;accent-color:var(--clear);cursor:pointer;}
+.check span{font-size:13px;line-height:1.45;}
+.tinput{width:100%;border:1px solid var(--line);border-radius:9px;padding:12px 14px;font-size:14.5px;font-family:inherit;color:var(--ink);outline:none;background:var(--surface);resize:vertical;line-height:1.55;transition:border-color .15s,box-shadow .15s;}
+.tinput:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accentSoft);}
+.tinput::placeholder{color:var(--inkFaint);}
+
+.btn{background:var(--ink);color:#fff;border:none;border-radius:9px;padding:14px 24px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .16s;}
+.btn:hover{background:var(--ink2);transform:translateY(-1px);box-shadow:var(--shadowUp);}
+.btn.wide{width:100%;}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);font-weight:500;padding:12px 20px;font-size:14px;}
+.btn.ghost:hover{background:var(--surface);border-color:var(--inkFaint);}
+.btn.accent{background:var(--accent);}
+.btn.accent:hover{background:var(--accent2);}
+.err{background:var(--criticalSoft);color:var(--critical);padding:12px 14px;border-radius:8px;font-size:13.5px;margin-bottom:14px;border:1px solid rgba(155,58,47,.16);}
+.starter{background:linear-gradient(135deg,var(--accentSoft),var(--base));border:1px solid var(--line);border-radius:11px;padding:18px 20px;margin-bottom:26px;}
+
+.rephead{padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--line);}
+.repeyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.11em;color:var(--accent);margin-bottom:6px;}
+.scorewrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap;}
+.dial{width:96px;height:96px;flex:0 0 auto;position:relative;}
+.dial svg{width:100%;height:100%;}
+.dial .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.dial .num b{font-family:'Newsreader',serif;font-size:31px;font-weight:600;line-height:1;}
+.dial .num s{text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--inkFaint);margin-top:3px;letter-spacing:.06em;}
+.flags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid var(--lineSoft);}
+.flag{font-size:12px;font-weight:500;padding:6px 12px;border-radius:20px;background:var(--base);color:var(--inkFaint);border:1px solid var(--line);}
+.flag.on{background:var(--attentionSoft);color:var(--attention);border-color:rgba(169,108,14,.25);font-weight:600;}
+
+.finding{padding:22px 24px;border-top:1px solid var(--lineSoft);}
+.finding:first-child{border-top:none;}
+.fhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:9px;}
+.sev{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:5px;letter-spacing:.04em;text-transform:uppercase;}
+.sev.critical,.sev.high{background:var(--criticalSoft);color:var(--critical);}
+.sev.medium{background:var(--attentionSoft);color:var(--attention);}
+.sev.low{background:var(--accentSoft);color:var(--accent);}
+.sev.clear{background:var(--clearSoft);color:var(--clear);}
+.farea{font-family:'Newsreader',serif;font-size:17.5px;font-weight:600;}
+.fprov{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--inkFaint);}
+.ftext{margin:0 0 12px;font-size:14px;color:var(--inkSoft);}
+.fnext{display:flex;gap:11px;background:var(--base);padding:12px 14px;border-radius:8px;border-left:3px solid var(--accent);}
+.fnext .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--accent);margin-top:3px;flex:0 0 auto;letter-spacing:.09em;}
+.fnext .txt{font-size:13.5px;line-height:1.5;}
+.deduct{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--inkFaint);margin-top:9px;}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px;}
+.mini h4{font-size:16px;margin-bottom:11px;}
+.mini ul{margin:0;padding-left:18px;}
+.mini li{font-size:13.5px;color:var(--inkSoft);margin-bottom:7px;line-height:1.5;}
+
+.ditem{padding:15px 18px;border-top:1px solid var(--lineSoft);}
+.ditem:first-child{border-top:none;}
+.ditem:nth-child(even){background:#FAFBFC;}
+.dcat{font-size:14.5px;font-weight:600;margin-bottom:4px;}
+.dpur{font-size:13.5px;color:var(--inkSoft);line-height:1.55;}
+.dret{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--accent);margin-top:6px;}
+.gapbox{background:var(--attentionSoft);border:1px solid rgba(169,108,14,.22);border-radius:12px;padding:22px;margin-bottom:16px;}
+.gapbox h4{font-size:17px;color:var(--attention);margin-bottom:10px;}
+.gapbox ul{margin:0;padding-left:19px;}
+.gapbox li{font-size:13.5px;margin-bottom:7px;line-height:1.5;}
+.empty{background:var(--attentionSoft);color:var(--attention);padding:14px 16px;border-radius:9px;font-size:13.5px;margin-bottom:16px;border:1px solid rgba(169,108,14,.2);}
+
+footer{background:var(--ink);color:#93A0AF;padding:30px 0 32px;}
+.foot-top{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+  padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.09);}
+.foot-rev{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#6E7C8B;letter-spacing:.04em;}
+footer .legal{font-size:12px;color:#6E7C8B;padding-top:18px;line-height:1.65;margin:0;max-width:88ch;}
+.privacy-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(63,124,122,.16);border:1px solid rgba(127,179,174,.28);color:#8FC4BE;border-radius:8px;padding:9px 13px;font-size:12.5px;font-weight:500;}
+
+@media(max-width:820px){
+  .hero .wrap{grid-template-columns:1fr;gap:30px;padding-top:42px;padding-bottom:42px;}
+  .heroart{max-width:240px;}
+}
+@media(max-width:680px){
+  .nav .wrap{height:auto;padding-top:11px;padding-bottom:11px;flex-wrap:wrap;gap:11px;}
+  .navtabs{width:100%;overflow-x:auto;}
+  .navtab{padding:7px 11px;font-size:13px;}
+  .concept{grid-template-columns:1fr;gap:14px;}
+  .prose{text-align:left;}
+  .sechead{gap:12px;}
+  .secicon{width:32px;height:32px;}
+  .sectitle{font-size:22px;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="8" fill="#2F5D62"/>
+        <path d="M16 7l7 3v6c0 4.2-2.8 7.6-7 9-4.2-1.4-7-4.8-7-9v-6l7-3z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/>
+        <path d="M12.6 16.2l2.3 2.3 4.4-4.6" stroke="#8FC4BE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="nm">AI Governance Toolkit</span>
+    </a>
+    <div class="navtabs">
+      <button class="navtab on" data-tab="learn">Learn</button>
+      <button class="navtab" data-tab="assess">Assess</button>
+      <button class="navtab" data-tab="draft">Draft</button>
+      <button class="navtab" data-tab="sources">Sources</button>
+    </div>
+  </div>
+</nav>
+
+<div class="hero" id="top">
+  <svg class="grid-bg" preserveAspectRatio="none" viewBox="0 0 1200 400">
+    <defs>
+      <pattern id="gp" width="46" height="46" patternUnits="userSpaceOnUse">
+        <path d="M46 0H0V46" fill="none" stroke="rgba(143,196,190,.09)" stroke-width="1"/>
+      </pattern>
+      <radialGradient id="gf" cx="78%" cy="32%" r="55%">
+        <stop offset="0%" stop-color="rgba(63,124,122,.32)"/>
+        <stop offset="100%" stop-color="rgba(63,124,122,0)"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="400" fill="url(#gp)"/>
+    <rect width="1200" height="400" fill="url(#gf)"/>
+  </svg>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">DPDP Act 2023 &middot; Rules 2025 &middot; MeitY Guidelines</div>
+      <h1>Know which rules<br>actually <em>apply to you</em></h1>
+      <p class="prose">A structured reference and assessment tool for India's data protection framework. It sets out the governing principles, evaluates which statutory obligations attach to a given product, and produces a draft privacy notice from that assessment.</p>
+      <div class="herostats">
+        <div class="hstat"><div class="v">9</div><div class="l">Obligation areas mapped</div></div>
+        <div class="hstat"><div class="v">&#8377;250 cr</div><div class="l">Highest single penalty</div></div>
+        <div class="hstat"><div class="v">May 2027</div><div class="l">Full compliance deadline</div></div>
+      </div>
+    </div>
+    <svg class="heroart" viewBox="0 0 300 260" fill="none">
+      <path d="M40 214a110 110 0 01220 0" stroke="rgba(143,196,190,.20)" stroke-width="1.5" stroke-dasharray="5 7"/>
+      <path d="M66 214a84 84 0 01168 0" stroke="rgba(143,196,190,.14)" stroke-width="1.5"/>
+      <path d="M150 44l53 21v46c0 32-21 58-53 69-32-11-53-37-53-69V65l53-21z" fill="rgba(47,93,98,.32)" stroke="#8FC4BE" stroke-width="2" stroke-linejoin="round"/>
+      <g stroke="#8FC4BE" stroke-width="1.6" opacity=".9">
+        <line x1="150" y1="112" x2="150" y2="82"/><line x1="150" y1="112" x2="124" y2="98"/>
+        <line x1="150" y1="112" x2="176" y2="98"/><line x1="150" y1="112" x2="128" y2="136"/>
+        <line x1="150" y1="112" x2="172" y2="136"/>
+      </g>
+      <circle cx="150" cy="112" r="8" fill="#8FC4BE"/>
+      <circle cx="150" cy="82" r="5" fill="#151C26" stroke="#8FC4BE" stroke-width="2"/>
+      <circle cx="124" cy="98" r="5" fill="#151C26" stroke="#8FC4BE" stroke-width="2"/>
+      <circle cx="176" cy="98" r="5" fill="#151C26" stroke="#8FC4BE" stroke-width="2"/>
+      <circle cx="128" cy="136" r="5" fill="#151C26" stroke="#8FC4BE" stroke-width="2"/>
+      <circle cx="172" cy="136" r="5" fill="#151C26" stroke="#8FC4BE" stroke-width="2"/>
+      <rect x="90" y="206" width="120" height="7" rx="3.5" fill="rgba(143,196,190,.28)"/>
+      <rect x="90" y="222" width="84" height="6" rx="3" fill="rgba(143,196,190,.17)"/>
+      <rect x="90" y="236" width="102" height="6" rx="3" fill="rgba(143,196,190,.11)"/>
+    </svg>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+<div class="panel on" id="p-learn">
+  <div class="section">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <path d="M20 11v20M11 16h18" stroke="#2F5D62" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M11 16l-3.4 7.6a3.9 3.9 0 007.8 0L11 16zM29 16l-3.4 7.6a3.9 3.9 0 007.8 0L29 16z" stroke="#2F5D62" stroke-width="1.4" stroke-linejoin="round"/>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">SECTION 01</div>
+        <h2 class="sectitle">Governance, or safety?</h2>
+      </div>
+    </div>
+    <p class="lede prose">The two terms are often used interchangeably. They describe different work, and the distinction matters when deciding what a given problem actually requires.</p>
+    <div class="seg"><button class="on" data-side="gov">Governance</button><button data-side="safe">Safety</button></div>
+    <div class="card" id="conceptCard"></div>
+  </div>
+
+  <div class="section">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <g stroke="#2F5D62" stroke-width="1.1" opacity=".45">
+          <line x1="20" y1="20" x2="20" y2="10"/><line x1="20" y1="20" x2="28.7" y2="15"/>
+          <line x1="20" y1="20" x2="28.7" y2="25"/><line x1="20" y1="20" x2="20" y2="30"/>
+          <line x1="20" y1="20" x2="11.3" y2="25"/><line x1="20" y1="20" x2="11.3" y2="15"/>
+        </g>
+        <circle cx="20" cy="20" r="3.6" fill="#2F5D62"/>
+        <g stroke="#2F5D62" stroke-width="1.5" fill="#fff">
+          <circle cx="20" cy="9.5" r="2.5"/><circle cx="29.1" cy="14.8" r="2.5"/><circle cx="29.1" cy="25.2" r="2.5"/>
+          <circle cx="20" cy="30.5" r="2.5"/><circle cx="10.9" cy="25.2" r="2.5"/><circle cx="10.9" cy="14.8" r="2.5"/>
+        </g>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">SECTION 02</div>
+        <h2 class="sectitle">The seven sutras</h2>
+      </div>
+    </div>
+    <p class="lede prose">India's AI Governance Guidelines rest on seven principles rather than a binding statute. Select any card to read what it commits to.</p>
+    <div class="sutras" id="sutras"></div>
+  </div>
+
+  <div class="section">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <line x1="13" y1="11" x2="13" y2="30" stroke="#DEE3E8" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="13" cy="14" r="2.8" fill="#2F5D62"/><circle cx="13" cy="21" r="2.8" fill="#2F5D62"/>
+        <circle cx="13" cy="28" r="2.8" fill="#F4F6F7" stroke="#A96C0E" stroke-width="1.8"/>
+        <line x1="19" y1="14" x2="30" y2="14" stroke="#DEE3E8" stroke-width="2" stroke-linecap="round"/>
+        <line x1="19" y1="21" x2="27" y2="21" stroke="#DEE3E8" stroke-width="2" stroke-linecap="round"/>
+        <line x1="19" y1="28" x2="31" y2="28" stroke="#DEE3E8" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">SECTION 03</div>
+        <h2 class="sectitle">How the framework came together</h2>
+      </div>
+    </div>
+    <p class="lede prose">India layered its AI rules onto existing data protection law rather than enacting a single dedicated statute.</p>
+    <div class="tl" id="timeline"></div>
+  </div>
+
+  <div class="section">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <path d="M20 10v20" stroke="#9B3A2F" stroke-width="1.7" stroke-linecap="round"/>
+        <path d="M24.5 15c0-2-2-3.1-4.5-3.1s-4.5 1-4.5 2.9c0 4.3 9 2.1 9 6.4 0 2-2 3.2-4.5 3.2s-4.5-1.2-4.5-3.2" stroke="#9B3A2F" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">SECTION 04</div>
+        <h2 class="sectitle">What non-compliance costs</h2>
+      </div>
+    </div>
+    <p class="lede prose">Maximum penalties under the Act's schedule. Note that the largest exposure attaches to security safeguards, an obligation applying to every data fiduciary regardless of sector or user age.</p>
+    <div class="boxlist" id="penalties"></div>
+  </div>
+</div>
+
+<div class="panel" id="p-assess">
+  <div class="section" style="border-bottom:none;">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <rect x="12" y="10" width="16" height="20" rx="2.5" stroke="#2F5D62" stroke-width="1.6"/>
+        <path d="M15.5 16.4l1.7 1.7 3.3-3.4" stroke="#2C6B4F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15.5 23.4l1.7 1.7 3.3-3.4" stroke="#2C6B4F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="23" y1="16" x2="25.3" y2="16" stroke="#DEE3E8" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="23" y1="23" x2="25.3" y2="23" stroke="#DEE3E8" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">ASSESSMENT</div>
+        <h2 class="sectitle">Which obligations apply to you</h2>
+      </div>
+    </div>
+    <p class="lede prose">Answer a short series of questions about what you build and what you already have in place. The engine maps your answers onto statutory obligations and returns a severity-ranked report. Nothing you enter leaves this page.</p>
+    <div id="assessForm"></div>
+    <div id="assessReport"></div>
+  </div>
+</div>
+
+<div class="panel" id="p-draft">
+  <div class="section" style="border-bottom:none;">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <path d="M13 11h9.5l5.5 5.5V29a2 2 0 01-2 2H13a2 2 0 01-2-2V13a2 2 0 012-2z" stroke="#2F5D62" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M22.5 11v5.5H28" stroke="#2F5D62" stroke-width="1.6" stroke-linejoin="round"/>
+        <line x1="15" y1="21" x2="24" y2="21" stroke="#8FC4BE" stroke-width="1.7" stroke-linecap="round"/>
+        <line x1="15" y1="25" x2="21" y2="25" stroke="#8FC4BE" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">DOCUMENT</div>
+        <h2 class="sectitle">Draft privacy notice</h2>
+      </div>
+    </div>
+    <div id="draftOut"></div>
+  </div>
+</div>
+
+<div class="panel" id="p-sources">
+  <div class="section">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <path d="M11 13.8c3-1.5 6-1.5 9 0v13.4c-3-1.5-6-1.5-9 0V13.8z" stroke="#2F5D62" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M29 13.8c-3-1.5-6-1.5-9 0v13.4c3-1.5 6-1.5 9 0V13.8z" stroke="#2F5D62" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">REFERENCES 01</div>
+        <h2 class="sectitle">Primary legal instruments</h2>
+      </div>
+    </div>
+    <p class="lede prose">The binding law. Every provision cited in an assessment finding traces back to one of these instruments.</p>
+    <div class="boxlist" id="srcPrimary"></div>
+  </div>
+
+  <div class="section">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <rect x="11" y="12" width="18" height="16" rx="2" stroke="#2F5D62" stroke-width="1.5"/>
+        <line x1="15" y1="17" x2="25" y2="17" stroke="#8FC4BE" stroke-width="1.7" stroke-linecap="round"/>
+        <line x1="15" y1="21" x2="25" y2="21" stroke="#8FC4BE" stroke-width="1.7" stroke-linecap="round"/>
+        <line x1="15" y1="25" x2="21" y2="25" stroke="#8FC4BE" stroke-width="1.7" stroke-linecap="round"/>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">REFERENCES 02</div>
+        <h2 class="sectitle">Policy and guidance</h2>
+      </div>
+    </div>
+    <p class="lede prose">Non-binding material that nonetheless shapes how the binding rules are interpreted and enforced.</p>
+    <div class="boxlist" id="srcPolicy"></div>
+  </div>
+
+  <div class="section">
+    <div class="sechead">
+      <svg class="secicon" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="19" stroke="#DEE3E8" stroke-width="1.5"/>
+        <circle cx="18" cy="18" r="6.8" stroke="#2F5D62" stroke-width="1.6"/>
+        <line x1="22.9" y1="22.9" x2="28.5" y2="28.5" stroke="#2F5D62" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <div class="sectitles">
+        <div class="secnum">REFERENCES 03</div>
+        <h2 class="sectitle">Secondary and interpretive</h2>
+      </div>
+    </div>
+    <p class="lede prose">Professional commentary used to sense-check readings of the statute. Consulted, not relied upon.</p>
+    <div class="boxlist" id="srcSecondary" style="margin-bottom:22px;"></div>
+
+    <div class="card">
+      <h4 style="font-size:17px;margin-bottom:12px;">Method and limits</h4>
+      <p class="prose" style="font-size:14px;color:var(--inkSoft);margin:0 0 13px;">The rule engine encodes obligations directly from the statutory text and the 2025 Rules. Where the law is silent or pending notification, the tool states this in its output rather than inferring a position. Scoring weights reflect the author's judgement, calibrated against the penalty schedule, and each deduction is displayed alongside its finding so the reasoning can be examined and disputed.</p>
+      <p class="prose" style="font-size:14px;color:var(--inkSoft);margin:0;">Last reviewed against the sources above in September 2026. The framework remains mid-transition, with full obligations in force from 14 May 2027, so findings reflect the position at the review date rather than necessarily the position today.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="privacy-badge">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+          <path d="M8 1.5l5 2v4c0 3.2-2 5.6-5 6.7-3-1.1-5-3.5-5-6.7v-4l5-2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        Runs entirely in your browser. Nothing you enter is sent anywhere.
+      </div>
+      <div class="foot-rev">Last reviewed September 2026</div>
+    </div>
+    <p class="legal prose">This tool produces a preliminary signal intended for triage and internal discussion. It is not legal advice and does not substitute for review by a qualified practitioner. Full DPDP obligations phase in to 14 May 2027. Sensitive personal data categories and cross-border transfer restrictions remain pending government notification.</p>
+  </div>
+</footer>
+
+<script>
+
+/* ============================================================
+   Knowledge base
+   ============================================================ */
+const CONCEPTS = {
+  gov:{icon:`<svg viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="15" fill="#E9F1F1"/><path d="M32 18v28M20 25h24" stroke="#2F5D62" stroke-width="2.4" stroke-linecap="round"/><path d="M20 25l-5 11a5.5 5.5 0 0011 0l-6-11zM44 25l-5 11a5.5 5.5 0 0011 0l-6-11z" stroke="#2F5D62" stroke-width="2" stroke-linejoin="round"/><circle cx="32" cy="16" r="3" fill="#2F5D62"/></svg>`,
+    tag:"The rulebook",head:"Who is accountable, and to whom",
+    body:"The policies, institutions, and accountability structures, set by governments and by organisations themselves, that determine how AI systems get built, deployed, and answered for. It asks who authorised a system, who owns its outcomes, and what happens when it causes harm."},
+  safe:{icon:`<svg viewBox="0 0 64 64" fill="none"><rect x="2" y="2" width="60" height="60" rx="15" fill="#E9F1F1"/><rect x="21" y="21" width="22" height="22" rx="5" stroke="#2F5D62" stroke-width="2.2"/><circle cx="32" cy="32" r="4.5" fill="#2F5D62"/><g stroke="#2F5D62" stroke-width="2" stroke-linecap="round"><line x1="26" y1="15" x2="26" y2="21"/><line x1="38" y1="15" x2="38" y2="21"/><line x1="26" y1="43" x2="26" y2="49"/><line x1="38" y1="43" x2="38" y2="49"/><line x1="15" y1="26" x2="21" y2="26"/><line x1="15" y1="38" x2="21" y2="38"/><line x1="43" y1="26" x2="49" y2="26"/><line x1="43" y1="38" x2="49" y2="38"/></g></svg>`,
+    tag:"The engineering",head:"Does the system actually behave",
+    body:"The technical discipline of preventing accidents, misuse, and harm from AI systems, covering alignment, robustness, monitoring, and evaluation. It is narrower than governance, and it produces the measurement methods that governance rules depend on. You cannot regulate what you cannot evaluate."}
+};
+
+const SUTRAS = [
+  ["Trust","AI systems should earn confidence through consistent, predictable behaviour."],
+  ["People-first governance","Human wellbeing is the yardstick, not adoption speed for its own sake."],
+  ["Innovation over restraint","Default to enabling development, with targeted safeguards rather than blanket limits."],
+  ["Fairness and equity","Systems should not concentrate benefit or harm unevenly across groups."],
+  ["Accountability","Someone identifiable owns the outcome of every deployed system."],
+  ["Understandability by design","Systems should be explainable to the people they affect."],
+  ["Safety and resilience","Systems should hold up under stress, misuse, and long-term operation."]
+];
+
+const TIMELINE = [
+  ["Aug 2023","DPDP Act receives assent","Commencement deferred pending Rules.",0],
+  ["13 Nov 2025","DPDP Rules 2025 notified","Operational detail lands; Data Protection Board established.",0],
+  ["Nov 2025","MeitY AI Governance Guidelines","Seven principles, voluntary in nature. No standalone AI statute.",0],
+  ["10 Feb 2026","IT Amendment Rules","Binding rules on synthetic content and deepfake labelling.",0],
+  ["14 May 2027","Full DPDP obligations in force","The end of the phased compliance runway.",1]
+];
+
+const PENALTIES = [
+  ["Failure to implement reasonable security safeguards","Section 8(5)","₹250 cr"],
+  ["Failure to notify a personal data breach","Section 8(6)","₹200 cr"],
+  ["Non-compliance with children's data provisions","Section 9","₹200 cr"],
+  ["Failure to meet Significant Data Fiduciary duties","Section 10","₹150 cr"]
+];
+
+const DATA_CATS = [
+  {id:"identity", label:"Name, email, phone", sens:0, purpose:"Creating and maintaining your account, and contacting you about the service", ret:"For as long as your account is active, plus 90 days"},
+  {id:"govid",    label:"Government ID (Aadhaar, PAN)", sens:1, purpose:"Verifying your identity where the law requires us to", ret:"As long as the applicable KYC rules require"},
+  {id:"financial",label:"Financial or payment data", sens:1, purpose:"Processing payments and maintaining transaction records", ret:"As required by financial record-keeping rules"},
+  {id:"health",   label:"Health or medical data", sens:1, purpose:"Delivering the health-related features you have asked for", ret:"For the duration of care, plus any statutory retention period"},
+  {id:"biometric",label:"Biometric data", sens:1, purpose:"Authenticating you securely", ret:"Until you disable biometric access"},
+  {id:"location", label:"Precise location", sens:1, purpose:"Providing location-dependent features", ret:"Kept for the session, then aggregated"},
+  {id:"behaviour",label:"Usage and behavioural data", sens:0, purpose:"Understanding how the service is used so we can improve it", ret:"13 months, then aggregated"},
+  {id:"media",    label:"Photos, video, or voice", sens:0, purpose:"Storing and processing the content you upload", ret:"Until you delete the content or close your account"},
+  {id:"comms",    label:"Messages or chat content", sens:0, purpose:"Delivering the conversation features of the service", ret:"Until you delete the conversation or close your account"}
+];
+
+const SAFEGUARDS = [
+  {id:"notice",    label:"Published itemised privacy notice"},
+  {id:"withdraw",  label:"Consent withdrawal as easy as giving it"},
+  {id:"retention", label:"Documented retention and erasure schedule"},
+  {id:"security",  label:"Encryption and access controls on personal data"},
+  {id:"breach",    label:"Tested 72-hour breach response plan"},
+  {id:"grievance", label:"Named grievance contact with response timeline"},
+  {id:"parental",  label:"Verifiable parental consent flow"},
+  {id:"noprofile", label:"Tracking and behavioural ads disabled for under-18s"},
+  {id:"dpo",       label:"Data Protection Officer appointed in India"},
+  {id:"dpia",      label:"Annual DPIA and independent audit"},
+  {id:"ailabel",   label:"AI-generated content labelled"},
+  {id:"humanrev",  label:"Human review pathway for automated decisions"}
+];
+
+const SOURCES = {
+  primary:[
+    ["Digital Personal Data Protection Act, 2023","Parliament of India","Assented August 2023","The operative statute. Sections 5 to 16 supply the obligation structure used throughout the Assess module."],
+    ["Digital Personal Data Protection Rules, 2025","MeitY","Notified 13 November 2025","Operational detail: Rule 3 notice content, Rule 7 breach reporting, Rule 10 parental consent verification, Rule 13 SDF duties."],
+    ["IT Amendment Rules, synthetically generated content","MeitY","Notified 10 February 2026","Binding labelling and metadata obligations for AI-generated content."]
+  ],
+  policy:[
+    ["India AI Governance Guidelines","MeitY","November 2025","The seven sutras and the proposed institutional architecture. Voluntary and principles-based rather than statutory."],
+    ["International AI Safety Report 2026","Chaired by Yoshua Bengio, 30+ nominating states","2026","Used for the governance and safety distinction in the Learn module."]
+  ],
+  secondary:[
+    ["Professional compliance commentary","Various advisory firms","2025 to 2026","Cross-checked against readings of the penalty schedule and SDF designation criteria."],
+    ["Data Protection Board of India, published materials","Government of India","2025 onward","Enforcement posture and grievance escalation route."]
+  ]
+};
+
+const SECTORS = ["EdTech","HealthTech","Fintech","E-commerce","SaaS / B2B","Social / Content","AgriTech","Other"];
+const SCALES  = [["s","Under 10,000 users"],["m","10,000 – 100,000"],["l","100,000 – 1 million"],["xl","Over 1 million"]];
+
+const PRESETS = {
+  edtech:{name:"Homework-help chatbot", text:"An AI tutoring app for students aged 10 to 16, storing chat history to personalise sessions.", sector:"EdTech", cats:["identity","behaviour","comms"], minors:"yes", scale:"m", cross:"yes", auto:"no", genai:"yes", have:["notice"]},
+  fintech:{name:"Loan underwriting model", text:"A lending platform scoring creditworthiness from bank statements, KYC records, and device signals.", sector:"Fintech", cats:["identity","govid","financial","location"], minors:"no", scale:"l", cross:"no", auto:"yes", genai:"no", have:["notice","security","grievance","retention"]},
+  health:{name:"Diagnostic imaging tool", text:"Flags anomalies in chest X-rays for radiologists across partner hospitals, with a human making the final call.", sector:"HealthTech", cats:["identity","health","media"], minors:"unsure", scale:"m", cross:"no", auto:"no", genai:"no", have:["notice","security","retention","breach"]}
+};
+
+/* ============================================================
+   State
+   ============================================================ */
+const S = { productName:"", notes:"", sector:"", cats:[], minors:"", scale:"", cross:"", auto:"", genai:"", have:[], report:null };
+
+/* ============================================================
+   Rule engine — deterministic, fully auditable
+   ============================================================ */
+function assess(s){
+  const F = [];
+  const has = id => s.have.includes(id);
+  const sensitive = s.cats.filter(c => DATA_CATS.find(d=>d.id===c)?.sens);
+  const bigScale = s.scale==="l" || s.scale==="xl";
+  const likelySDF = (bigScale && sensitive.length>0) || s.scale==="xl";
+  const minors = s.minors==="yes";
+  const maybeMinors = s.minors==="unsure";
+
+  let score = 100;
+  const cut = (n,f)=>{ score -= n; f.deduct = `−${n} points`; return f; };
+
+  // 1. Security safeguards — universal, highest penalty
+  if(!has("security")){
+    F.push(cut(sensitive.length?22:15,{
+      sev:"critical", area:"Security safeguards", prov:"Section 8(5)",
+      text:`You collect ${s.cats.length} categories of personal data${sensitive.length?`, ${sensitive.length} of them higher-risk`:""}, but have not confirmed encryption or access controls. This provision carries the largest penalty in the Act at ₹250 crore, and responsibility stays with you even where a third party does the processing.`,
+      action:"Document your encryption, access control, and processor contract terms."
+    }));
+  } else {
+    F.push({sev:"clear", area:"Security safeguards", prov:"Section 8(5)",
+      text:"You have confirmed encryption and access controls. Ensure the same terms flow down contractually to any processor handling this data on your behalf.",
+      action:"Review processor agreements for equivalent safeguard obligations."});
+  }
+
+  // 2. Breach notification — universal
+  if(!has("breach")){
+    F.push(cut(16,{
+      sev:"critical", area:"Breach notification", prov:"Section 8(6) / Rule 7",
+      text:"No tested breach response plan. The Act allows 72 hours from becoming aware of a breach to notify both the Data Protection Board and every affected individual. Without detection and escalation tooling in place, that window is not realistically achievable.",
+      action:"Build a detection-to-notification runbook and rehearse it once."
+    }));
+  }
+
+  // 3. Children's data
+  if(minors){
+    const gaps = [];
+    if(!has("parental")) gaps.push("verifiable parental consent");
+    if(!has("noprofile")) gaps.push("the ban on tracking and behavioural ads");
+    if(gaps.length){
+      F.push(cut(gaps.length*13,{
+        sev:"critical", area:"Children's data", prov:"Section 9 / Rule 10",
+        text:`You process data of users under 18 but have not confirmed ${gaps.join(" or ")}. Rule 10 requires verifiable parental consent, with approved verification methods including DigiLocker. Tracking, profiling, and behaviourally targeted advertising to children are prohibited outright. Consent does not cure this.`,
+        action:"Build the parental consent flow and disable all behavioural targeting for under-18 accounts."
+      }));
+    } else {
+      F.push({sev:"clear", area:"Children's data", prov:"Section 9 / Rule 10",
+        text:"Parental consent and the no-tracking rule are both addressed. Note the carve-outs: health, education, subsidy delivery, and email account creation are exempt from the consent step itself.",
+        action:"Confirm whether any of your processing falls within a Rule 10 exemption."});
+    }
+  } else if(maybeMinors){
+    F.push(cut(10,{
+      sev:"high", area:"Age of your users is unresolved", prov:"Section 9",
+      text:"You are unsure whether any users are under 18. Section 9 turns on whether you knowingly process a child's data, so the answer determines whether the strictest obligations in the Act apply to you. This is the single highest-value question to resolve.",
+      action:"Run an age-distribution analysis on your existing user base."
+    }));
+  }
+
+  // 4. SDF duties
+  if(likelySDF){
+    const gaps = [];
+    if(!has("dpo")) gaps.push("a Data Protection Officer based in India");
+    if(!has("dpia")) gaps.push("annual DPIA and independent audit");
+    if(gaps.length){
+      F.push(cut(12,{
+        sev:"high", area:"Significant Data Fiduciary duties", prov:"Section 10 / Rule 13",
+        text:`Your scale${sensitive.length?" combined with higher-risk data categories":""} makes SDF designation plausible. You have not confirmed ${gaps.join(" or ")}. Designation is by government notification, so this is a preparatory flag rather than a present breach.`,
+        action:"Scope the DPO role and audit cadence now, ahead of any designation."
+      }));
+    }
+  }
+
+  // 5. Notice & consent
+  if(!has("notice") || !has("withdraw")){
+    const missing = [!has("notice") && "an itemised notice", !has("withdraw") && "a withdrawal mechanism"].filter(Boolean);
+    F.push(cut(11,{
+      sev:"high", area:"Notice and consent", prov:"Sections 5, 6 / Rule 3",
+      text:`Missing ${missing.join(" and ")}. Rule 3 requires a standalone notice that itemises every data category against its specific purpose, and consent must be as easy to withdraw as it was to give.`,
+      action:"Use the Draft tab to generate a first-pass notice from these answers."
+    }));
+  }
+
+  // 6. Retention
+  if(!has("retention")){
+    F.push(cut(8,{
+      sev:"medium", area:"Purpose limitation and retention", prov:"Section 8 / Rule 8",
+      text:"No documented retention schedule. Data must be erased once the notified purpose is served or consent is withdrawn, and that erasure has to reach data held by your processors too.",
+      action:"Set a retention period per data category and automate the deletion job."
+    }));
+  }
+
+  // 7. Grievance
+  if(!has("grievance")){
+    F.push(cut(7,{
+      sev:"medium", area:"Rights and grievance redressal", prov:"Sections 11–14",
+      text:"No named grievance contact published. Individuals need a route to access, correct, and erase their data, and a published escalation path to the Data Protection Board.",
+      action:"Publish a contact and an internal response timeline."
+    }));
+  }
+
+  // 8. Automated decisions
+  if(s.auto==="yes" && !has("humanrev")){
+    F.push(cut(9,{
+      sev:"high", area:"Automated decision-making", prov:"MeitY Guidelines, accountability and understandability",
+      text:"Decisions are automated without a confirmed human review pathway. MeitY's guidelines are voluntary, but 'understandability by design' and 'accountability' both point at a review route where a decision materially affects someone.",
+      action:"Add a human review path for adverse or high-impact outcomes."
+    }));
+  }
+
+  // 9. Synthetic content
+  if(s.genai==="yes" && !has("ailabel")){
+    F.push(cut(8,{
+      sev:"medium", area:"Synthetic content labelling", prov:"IT Amendment Rules, Feb 2026",
+      text:"Your system generates content but labelling is unconfirmed. Unlike the AI guidelines, these rules are binding, covering labelling and metadata for synthetically generated content.",
+      action:"Add visible labels and provenance metadata to generated output."
+    }));
+  }
+
+  // 10. Cross-border
+  if(s.cross==="yes"){
+    F.push({sev:"low", area:"Cross-border transfer", prov:"Section 16",
+      text:"Personal data leaves India. Section 16 lets the government restrict transfers to notified territories, but that notification has not been issued. This is a watch item, not a present obligation.",
+      action:"Map your current data flows so a future restriction can be actioned quickly."});
+  }
+
+  const order = {critical:0,high:1,medium:2,low:3,clear:4};
+  F.sort((a,b)=>order[a.sev]-order[b.sev]);
+
+  score = Math.max(5, Math.min(100, Math.round(score)));
+  const label = score>=80?"Broadly on track":score>=60?"Workable, with real gaps":score>=40?"Significant exposure":"Urgent attention needed";
+
+  const crit = F.filter(f=>f.sev==="critical").length;
+  const headline = crit
+    ? `${crit} obligation${crit>1?"s":""} with the highest penalty exposure ${crit>1?"are":"is"} currently unaddressed.`
+    : score>=80 ? "Core duties look covered; the remaining items are refinements."
+    : "No critical gaps, but several obligations need documenting before the 2027 deadline.";
+
+  const unknowns = [];
+  if(maybeMinors) unknowns.push("Whether any users are under 18, which changes the applicable regime.");
+  if(!s.scale) unknowns.push("User scale, which drives Significant Data Fiduciary likelihood.");
+  if(s.cats.length===0) unknowns.push("No data categories selected, so obligations could not be mapped.");
+
+  return {score,label,headline,findings:F,unknowns,
+    profile:{minors:minors, sdf:likelySDF, cross:s.cross==="yes", auto:s.auto==="yes"}};
+}
+
+/* ============================================================
+   Notice builder — templated from the same answers
+   ============================================================ */
+function buildNotice(s){
+  const minors = s.minors==="yes";
+  const items = s.cats.map(id=>DATA_CATS.find(d=>d.id===id)).filter(Boolean);
+  const gaps = [
+    (s.productName ? `Confirm "${s.productName}" matches your registered entity name` : "Replace [ORGANISATION] with your registered entity name"),
+    "Add your grievance officer's name and email address",
+    !s.have.includes("retention") && "Confirm each retention period against your actual deletion process",
+    s.cross==="yes" && "Name the countries where data is processed",
+    minors && "Describe your parental consent verification method"
+  ].filter(Boolean);
+
+  const org = s.productName ? s.productName : "[ORGANISATION]";
+  return {
+    org,
+    audience: minors ? "Parents and guardians of users under 18" : "People who use this service",
+    intro: minors
+      ? `This notice explains what personal data ${org} collects about your child, why we collect it, and what you can do about it. We ask for your consent before we collect anything, and you can withdraw it at any time.`
+      : `This notice explains what personal data ${org} collects about you, why we collect it, and what you can do about it. We ask for your consent before we collect anything, and you can withdraw it at any time.`,
+    items,
+    minors,
+    rights:[
+      "Ask us for a summary of the personal data we hold about you and what we have done with it",
+      "Ask us to correct anything inaccurate, or complete anything missing",
+      "Ask us to erase your data where we no longer need it for the purpose above",
+      "Nominate someone to exercise these rights on your behalf if you are unable to"
+    ],
+    withdrawal: "You can withdraw consent at any time from your account settings, in as few steps as it took to give it. We will stop the relevant processing and erase the data unless the law requires us to keep it.",
+    grievance: "Write to our grievance officer at [EMAIL]. We will respond within [N] days. If you are not satisfied, you can escalate the complaint to the Data Protection Board of India.",
+    noTracking: minors,
+    gaps
+  };
+}
+
+/* ============================================================
+   Rendering
+   ============================================================ */
+const $ = id => document.getElementById(id);
+
+// Tabs
+document.querySelectorAll(".navtab").forEach(t=>{
+  t.onclick = ()=>{
+    document.querySelectorAll(".navtab").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll(".panel").forEach(x=>x.classList.remove("on"));
+    t.classList.add("on");
+    $("p-"+t.dataset.tab).classList.add("on");
+    if(t.dataset.tab==="draft") renderDraft();
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+});
+
+// --- Learn ---
+function renderConcept(k){
+  const c=CONCEPTS[k];
+  $("conceptCard").innerHTML=
+    `<div class="concept"><div class="ic">${c.icon}</div><div>
+      <span class="tag">${c.tag}</span>
+      <div style="font-family:'Newsreader',serif;font-size:20px;font-weight:600;margin-bottom:8px;">${c.head}</div>
+      <p class="prose" style="margin:0;font-size:14.5px;color:var(--inkSoft);">${c.body}</p>
+    </div></div>`;
+}
+document.querySelectorAll(".seg button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".seg button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on"); renderConcept(b.dataset.side);
+  };
+});
+renderConcept("gov");
+
+function paintSutra(el,i,flipped){
+  el.innerHTML = flipped
+    ? `<div class="gl">${SUTRAS[i][1]}</div>`
+    : `<div class="n">${String(i+1).padStart(2,"0")}</div><div class="nm">${SUTRAS[i][0]}</div><div class="shint">Select to read</div>`;
+}
+$("sutras").innerHTML=SUTRAS.map((_,i)=>`<button class="sutra" data-i="${i}"></button>`).join("");
+document.querySelectorAll(".sutra").forEach(el=>{
+  const i=+el.dataset.i;
+  paintSutra(el,i,false);
+  el.onclick=()=>paintSutra(el,i,el.classList.toggle("flip"));
+});
+
+$("timeline").innerHTML = TIMELINE.map(([w,t,n,f])=>
+  `<div class="tl-i ${f?"future":""}"><div class="tl-w">${w}</div><div class="tl-t">${t}</div><div class="tl-n prose">${n}</div></div>`).join("");
+
+function renderSources(){
+  const row = ([t,pub,date,note]) =>
+    `<div class="row" style="display:block;">
+       <div style="font-size:14.5px;font-weight:600;margin-bottom:3px;">${t}</div>
+       <div class="mono" style="font-size:11.5px;color:var(--accent);margin-bottom:6px;">${pub} · ${date}</div>
+       <div class="prose" style="font-size:13.5px;color:var(--inkSoft);">${note}</div>
+     </div>`;
+  $("srcPrimary").innerHTML   = SOURCES.primary.map(row).join("");
+  $("srcPolicy").innerHTML    = SOURCES.policy.map(row).join("");
+  $("srcSecondary").innerHTML = SOURCES.secondary.map(row).join("");
+}
+renderSources();
+
+$("penalties").innerHTML = PENALTIES.map(([w,p,a])=>
+  `<div class="row"><div><div style="font-size:14px;font-weight:500;">${w}</div>
+   <div class="mono" style="font-size:11.5px;color:var(--inkSoft);">${p}</div></div>
+   <div class="amt">${a}</div></div>`).join("");
+
+// --- Assess form ---
+function renderForm(){
+  $("assessReport").innerHTML = "";
+  $("assessForm").innerHTML = `
+  <div class="card">
+    <div style="background:var(--base);border:1px dashed var(--line);border-radius:8px;padding:14px 16px;margin-bottom:22px;">
+      <div style="font-size:13px;color:var(--inkSoft);margin-bottom:10px;">Assess your own product, or open a worked example to see how the engine behaves.</div>
+      <div class="chips">
+        <button class="chip" style="border-color:var(--ink);background:var(--ink);color:#fff;font-weight:600;" data-preset="own">My own product</button>
+        ${Object.entries(PRESETS).map(([k,p])=>`<button class="chip" style="border-color:var(--accent);color:var(--accent);font-weight:600;" data-preset="${k}">Example: ${p.name}</button>`).join("")}
+      </div>
+    </div>
+
+    <div class="q">
+      <label for="pname">Product or system name</label>
+      <div class="hint">Appears on your assessment report and in the draft notice.</div>
+      <input id="pname" class="tinput" type="text" maxlength="80" placeholder="e.g. Acme Learning App" value="${S.productName.replace(/"/g,"&quot;")}">
+    </div>
+
+    <div class="q">
+      <label for="pnotes">What does it do? <span style="font-weight:400;color:var(--inkSoft);">(optional)</span></label>
+      <div class="hint">A sentence for your own records. It is printed on the report and is not used in scoring.</div>
+      <textarea id="pnotes" class="tinput" rows="2" maxlength="300" placeholder="e.g. A revision app for CBSE students, with practice tests and progress tracking.">${S.notes}</textarea>
+    </div>
+
+    <div class="q">
+      <label>Which categories of personal data does the product collect?</label>
+      <div class="hint">Amber marks higher-risk categories. Select all that apply.</div>
+      <div class="chips">${DATA_CATS.map(d=>`<button class="chip ${d.sens?"sens":""} ${S.cats.includes(d.id)?"on":""}" data-cat="${d.id}">${d.label}</button>`).join("")}</div>
+    </div>
+
+    <div class="q">
+      <label>Do any users fall under 18?</label>
+      <div class="hint">This determines whether Section 9 applies, the strictest regime in the Act.</div>
+      <div class="chips">${[["yes","Yes"],["no","No"],["unsure","Not sure"]].map(([v,l])=>`<button class="chip ${S.minors===v?"on":""}" data-f="minors" data-v="${v}">${l}</button>`).join("")}</div>
+    </div>
+
+    <div class="q">
+      <label>Roughly how many users?</label>
+      <div class="chips">${SCALES.map(([v,l])=>`<button class="chip ${S.scale===v?"on":""}" data-f="scale" data-v="${v}">${l}</button>`).join("")}</div>
+    </div>
+
+    <div class="q">
+      <label>Is personal data stored or processed outside India?</label>
+      <div class="chips">${[["yes","Yes"],["no","No"]].map(([v,l])=>`<button class="chip ${S.cross===v?"on":""}" data-f="cross" data-v="${v}">${l}</button>`).join("")}</div>
+    </div>
+
+    <div class="q">
+      <label>Are decisions about users made automatically, without human review?</label>
+      <div class="chips">${[["yes","Yes"],["no","No"]].map(([v,l])=>`<button class="chip ${S.auto===v?"on":""}" data-f="auto" data-v="${v}">${l}</button>`).join("")}</div>
+    </div>
+
+    <div class="q">
+      <label>Does the system generate content such as text, images, audio, or video?</label>
+      <div class="chips">${[["yes","Yes"],["no","No"]].map(([v,l])=>`<button class="chip ${S.genai===v?"on":""}" data-f="genai" data-v="${v}">${l}</button>`).join("")}</div>
+    </div>
+
+    <div class="q">
+      <label>Sector</label>
+      <div class="chips">${SECTORS.map(x=>`<button class="chip ${S.sector===x?"on":""}" data-f="sector" data-v="${x}">${x}</button>`).join("")}</div>
+    </div>
+
+    <div class="q">
+      <label>Which of these do you already have in place?</label>
+      <div class="hint">Answer accurately. Unchecked items become findings, which is the purpose of the exercise.</div>
+      <div class="checks">
+        ${SAFEGUARDS.map(g=>`<label class="check ${S.have.includes(g.id)?"on":""}" data-have="${g.id}">
+          <input type="checkbox" ${S.have.includes(g.id)?"checked":""}><span>${g.label}</span></label>`).join("")}
+      </div>
+    </div>
+
+    <div id="formErr"></div>
+    <button class="btn wide" id="runBtn">Run assessment</button>
+  </div>`;
+
+  // wiring
+  const syncText = ()=>{ S.productName = $("pname").value; S.notes = $("pnotes").value; };
+  $("pname").oninput = syncText;
+  $("pnotes").oninput = syncText;
+
+  document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{
+    if(b.dataset.preset==="own"){
+      Object.assign(S,{productName:"",notes:"",sector:"",cats:[],minors:"",scale:"",cross:"",auto:"",genai:"",have:[]});
+      renderForm();
+      $("pname").focus();
+      return;
+    }
+    const p = PRESETS[b.dataset.preset];
+    Object.assign(S,{productName:p.name,notes:p.text||"",sector:p.sector,cats:[...p.cats],minors:p.minors,scale:p.scale,cross:p.cross,auto:p.auto,genai:p.genai,have:[...p.have]});
+    renderForm();
+  });
+  document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.cat;
+    S.cats = S.cats.includes(id) ? S.cats.filter(x=>x!==id) : [...S.cats,id];
+    b.classList.toggle("on");
+  });
+  document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{
+    const f=b.dataset.f, v=b.dataset.v;
+    S[f] = S[f]===v ? "" : v;
+    document.querySelectorAll(`[data-f="${f}"]`).forEach(x=>x.classList.toggle("on", x.dataset.v===S[f]));
+  });
+  document.querySelectorAll("[data-have]").forEach(el=>el.onclick=e=>{
+    if(e.target.tagName!=="INPUT") e.preventDefault();
+    const id=el.dataset.have;
+    S.have = S.have.includes(id) ? S.have.filter(x=>x!==id) : [...S.have,id];
+    el.classList.toggle("on", S.have.includes(id));
+    el.querySelector("input").checked = S.have.includes(id);
+  });
+  $("runBtn").onclick = ()=>{
+    syncText();
+    if(S.cats.length===0){ $("formErr").innerHTML=`<div class="err">Select at least one data category. Obligations are mapped from what you collect.</div>`; return; }
+    S.report = assess(S);
+    renderReport();
+  };
+}
+
+function renderReport(){
+  const r = S.report;
+  const col = r.score>=70?"var(--clear)":r.score>=40?"var(--attention)":"var(--critical)";
+  const circ=2*Math.PI*42, off=circ*(1-r.score/100);
+  $("assessForm").innerHTML = "";
+  $("assessReport").innerHTML = `
+    <div class="card">
+      ${S.productName ? `<div style="padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid var(--line);">
+          <div style="font-size:11.5px;font-weight:600;color:var(--accent);margin-bottom:4px;">ASSESSMENT REPORT</div>
+          <div style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;">${S.productName}</div>
+          ${S.notes?`<div style="font-size:13.5px;color:var(--inkSoft);margin-top:5px;line-height:1.5;">${S.notes}</div>`:""}
+          <div class="mono" style="font-size:11.5px;color:var(--inkSoft);margin-top:8px;">${S.sector||"Sector unspecified"} · ${new Date().toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"})}</div>
+        </div>` : ""}
+      <div class="scorewrap">
+        <div class="dial">
+          <svg viewBox="0 0 96 96" style="transform:rotate(-90deg);">
+            <circle cx="48" cy="48" r="42" fill="none" stroke="var(--lineSoft)" stroke-width="8"/>
+            <circle cx="48" cy="48" r="42" fill="none" stroke="${col}" stroke-width="8" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${off}"/>
+          </svg>
+          <div class="num"><b style="color:${col};">${r.score}</b><s>OUT OF 100</s></div>
+        </div>
+        <div style="flex:1 1 300px;">
+          <div style="font-family:'Newsreader',serif;font-size:20px;font-weight:600;margin-bottom:6px;">${r.label}</div>
+          <p class="prose" style="margin:0;font-size:14.5px;color:var(--inkSoft);">${r.headline}</p>
+        </div>
+      </div>
+      <div class="flags">
+        <span class="flag ${r.profile.minors?"on":""}">${r.profile.minors?"● ":"○ "}Minors' data</span>
+        <span class="flag ${r.profile.sdf?"on":""}">${r.profile.sdf?"● ":"○ "}Likely SDF</span>
+        <span class="flag ${r.profile.cross?"on":""}">${r.profile.cross?"● ":"○ "}Cross-border</span>
+        <span class="flag ${r.profile.auto?"on":""}">${r.profile.auto?"● ":"○ "}Automated decisions</span>
+      </div>
+    </div>
+
+    <div class="boxlist" style="margin-bottom:16px;">
+      ${r.findings.map(f=>`
+        <div class="finding">
+          <div class="fhead">
+            <span class="sev ${f.sev}">${{critical:"Critical",high:"High",medium:"Attention",low:"Monitor",clear:"Likely clear"}[f.sev]}</span>
+            <span class="farea">${f.area}</span>
+            <span class="fprov">${f.prov}</span>
+          </div>
+          <p class="ftext prose">${f.text}</p>
+          <div class="fnext"><span class="lbl">NEXT</span><span class="txt">${f.action}</span></div>
+          ${f.deduct?`<div class="deduct">Score impact: ${f.deduct}</div>`:""}
+        </div>`).join("")}
+    </div>
+
+    ${r.unknowns.length?`<div class="card mini"><h4>Couldn't assess without knowing</h4><ul>${r.unknowns.map(u=>`<li>${u}</li>`).join("")}</ul></div>`:""}
+
+    <div class="card mini">
+      <h4>Where the law is still moving</h4>
+      <ul>
+        <li>Sensitive personal data categories await a separate notification.</li>
+        <li>Cross-border transfer restrictions remain deferred.</li>
+        <li>SDF designation criteria are set, but no entity list is published.</li>
+      </ul>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn accent" id="toDraft">Draft a privacy notice from this →</button>
+      <button class="btn ghost" id="again">Start over</button>
+    </div>`;
+
+  $("toDraft").onclick = ()=>document.querySelector('[data-tab="draft"]').click();
+  $("again").onclick = ()=>{
+    Object.assign(S,{productName:"",notes:"",sector:"",cats:[],minors:"",scale:"",cross:"",auto:"",genai:"",have:[],report:null});
+    renderForm();
+  };
+}
+
+// --- Draft ---
+function renderDraft(){
+  if(S.cats.length===0){
+    $("draftOut").innerHTML = `<div class="card">
+      <div style="font-family:'Newsreader',serif;font-size:19px;font-weight:600;margin-bottom:8px;">Draft an itemised privacy notice</div>
+      <p style="font-size:14.5px;color:var(--inkSoft);line-height:1.6;margin-top:0;">Rule 3 requires a standalone notice in plain language, itemising every data category against its specific purpose, and explaining how to withdraw consent.</p>
+      <div class="empty">Answer the questions on the Assess tab first. This notice is built from those answers.</div>
+      <button class="btn ghost" onclick="document.querySelector('[data-tab=&quot;assess&quot;]').click()">Go to Assess</button>
+    </div>`;
+    return;
+  }
+  const n = buildNotice(S);
+  $("draftOut").innerHTML = `
+    <div class="card">
+      <div class="noticetag">DRAFT FOR REVIEW</div>
+      <div style="font-family:'Newsreader',serif;font-size:20px;font-weight:600;margin-bottom:4px;">Privacy notice${S.productName?` for ${S.productName}`:""}</div>
+      <div style="font-size:13px;color:var(--inkSoft);margin-bottom:16px;">Addressed to: ${n.audience}</div>
+      <p class="prose" style="font-size:15px;line-height:1.7;margin:0;">${n.intro}</p>
+    </div>
+
+    <div class="card">
+      <h4 style="font-size:16.5px;margin-bottom:11px;">What we collect, and why</h4>
+      <div class="boxlist">
+        ${n.items.map(d=>`<div class="ditem">
+          <div class="dcat">${d.label}</div>
+          <div class="dpur prose">${d.purpose}</div>
+          <div class="dret">Kept: ${d.ret}</div>
+        </div>`).join("")}
+      </div>
+    </div>
+
+    ${n.noTracking?`<div class="card">
+      <h4 style="font-size:16.5px;margin-bottom:11px;">What we will never do</h4>
+      <p style="font-size:14px;color:var(--inkSoft);line-height:1.55;margin:0;">We do not track, monitor, or build behavioural profiles of users under 18, and we do not show them behaviourally targeted advertising. This is prohibited under Section 9 of the DPDP Act, and consent does not change it.</p>
+    </div>`:""}
+
+    <div class="card">
+      <h4 style="font-size:16.5px;margin-bottom:11px;">Your rights</h4>
+      <ul style="margin:0;padding-left:18px;">
+        ${n.rights.map(r=>`<li style="font-size:14px;color:var(--inkSoft);margin-bottom:7px;line-height:1.5;">${r}</li>`).join("")}
+      </ul>
+    </div>
+
+    <div class="grid2">
+      <div class="card" style="margin:0;"><h4 style="font-size:16.5px;margin-bottom:11px;">Withdrawing consent</h4><p style="font-size:14px;color:var(--inkSoft);line-height:1.55;margin:0;">${n.withdrawal}</p></div>
+      <div class="card" style="margin:0;"><h4 style="font-size:16.5px;margin-bottom:11px;">Complaints</h4><p style="font-size:14px;color:var(--inkSoft);line-height:1.55;margin:0;">${n.grievance}</p></div>
+    </div>
+
+    <div class="gapbox">
+      <h4>Fill these in before publishing</h4>
+      <ul>${n.gaps.map(g=>`<li>${g}</li>`).join("")}</ul>
+    </div>
+
+    <button class="btn ghost" id="copyBtn">Copy notice as text</button>
+    <span id="copyMsg" style="font-size:13px;color:var(--clear);margin-left:10px;"></span>`;
+
+  $("copyBtn").onclick = ()=>{
+    const txt = `PRIVACY NOTICE (DRAFT)${S.productName?`\n${S.productName}`:""}\nAddressed to: ${n.audience}\n\n${n.intro}\n\nWHAT WE COLLECT, AND WHY\n${n.items.map(d=>`- ${d.label}\n  Purpose: ${d.purpose}\n  Kept: ${d.ret}`).join("\n")}\n${n.noTracking?`\nWHAT WE WILL NEVER DO\nWe do not track, monitor, or profile users under 18, and we do not show them behaviourally targeted advertising (Section 9, DPDP Act).\n`:""}\nYOUR RIGHTS\n${n.rights.map(r=>`- ${r}`).join("\n")}\n\nWITHDRAWING CONSENT\n${n.withdrawal}\n\nCOMPLAINTS\n${n.grievance}\n\nTO COMPLETE BEFORE PUBLISHING\n${n.gaps.map(g=>`- ${g}`).join("\n")}`;
+    navigator.clipboard.writeText(txt).then(()=>{
+      $("copyMsg").textContent = "Copied.";
+      setTimeout(()=>$("copyMsg").textContent="",2000);
+    });
+  };
+}
+
+renderForm();
+</script>
+</body>
+</html>

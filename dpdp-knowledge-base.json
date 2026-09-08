@@ -1,0 +1,262 @@
+{
+  "meta": {
+    "name": "India AI Governance & DPDP Knowledge Base",
+    "version": "1.0.0",
+    "lastReviewed": "2026-09",
+    "disclaimer": "Reference material for preliminary assessment. Not legal advice.",
+    "sources": [
+      {
+        "id": "dpdp-act",
+        "title": "Digital Personal Data Protection Act, 2023",
+        "publisher": "Government of India",
+        "note": "Received presidential assent 2023; commencement deferred pending Rules."
+      },
+      {
+        "id": "dpdp-rules",
+        "title": "Digital Personal Data Protection Rules, 2025",
+        "publisher": "MeitY",
+        "notified": "2025-11-13",
+        "note": "Operationalises the Act. Phased compliance to 2027-05-14."
+      },
+      {
+        "id": "meity-guidelines",
+        "title": "India AI Governance Guidelines",
+        "publisher": "MeitY",
+        "published": "2025-11",
+        "note": "Voluntary, principles-based. No standalone AI statute."
+      },
+      {
+        "id": "it-amendment-2026",
+        "title": "IT Amendment Rules — synthetically generated content",
+        "publisher": "MeitY",
+        "notified": "2026-02-10",
+        "note": "Binding rules on deepfakes and AI-generated content labelling."
+      },
+      {
+        "id": "intl-safety-report",
+        "title": "International AI Safety Report 2026",
+        "publisher": "Chaired by Yoshua Bengio; 30+ nominating states",
+        "note": "Multilateral risk assessment; used for the safety-vs-governance framing."
+      }
+    ]
+  },
+
+  "concepts": {
+    "governance": {
+      "shortLabel": "The rulebook",
+      "definition": "The policies, institutions, and accountability structures — set by governments and organisations — that determine how AI systems are built, deployed, and answered for.",
+      "answers": [
+        "Who authorised this system?",
+        "Who owns its outcomes?",
+        "What happens when it causes harm?"
+      ],
+      "levels": [
+        "Government: statutes and regulatory frameworks (EU AI Act, India's Guidelines, US state laws)",
+        "Organisational: internal policy, risk management, oversight (NIST AI RMF, ISO/IEC 42001)"
+      ]
+    },
+    "safety": {
+      "shortLabel": "The engineering",
+      "definition": "The technical discipline of preventing accidents, misuse, and harmful consequences from AI systems — spanning alignment, robustness, monitoring, and evaluation.",
+      "scope": [
+        "Everyday: bias, hallucination, robustness failures",
+        "Frontier: loss-of-control and misuse risks from advanced systems"
+      ],
+      "relationship": "Safety research produces the measurement and testing methods that governance rules depend on. You cannot regulate what you cannot evaluate."
+    }
+  },
+
+  "sutras": [
+    { "n": 1, "name": "Trust", "gloss": "AI systems should earn confidence through consistent, predictable behaviour." },
+    { "n": 2, "name": "People-first governance", "gloss": "Human wellbeing is the yardstick, not adoption speed for its own sake." },
+    { "n": 3, "name": "Innovation over restraint", "gloss": "Default to enabling development, with targeted safeguards rather than blanket limits." },
+    { "n": 4, "name": "Fairness and equity", "gloss": "Systems should not concentrate benefit or harm unevenly across groups." },
+    { "n": 5, "name": "Accountability", "gloss": "Someone identifiable owns the outcome of every deployed system." },
+    { "n": 6, "name": "Understandability by design", "gloss": "Systems should be explainable to the people they affect." },
+    { "n": 7, "name": "Safety, resilience, sustainability", "gloss": "Systems should hold up under stress, misuse, and long-term operation." }
+  ],
+
+  "institutions": [
+    {
+      "name": "IndiaAI Mission",
+      "role": "Capacity layer",
+      "description": "Subsidised compute, datasets, and model infrastructure underpinning national AI capability."
+    },
+    {
+      "name": "AI Governance Group",
+      "role": "Coordination",
+      "description": "Proposed apex body for inter-ministerial AI policy coordination."
+    },
+    {
+      "name": "Technology & Policy Expert Committee",
+      "role": "Advisory",
+      "description": "Technical advisory input into governance decisions."
+    },
+    {
+      "name": "IndiaAI Safety Institute",
+      "role": "Testing and standards",
+      "description": "Hub-and-spoke body coordinating evaluation, standards, and risk monitoring across sector regulators."
+    },
+    {
+      "name": "Data Protection Board of India",
+      "role": "Enforcement",
+      "description": "Statutory body established alongside the 2025 Rules; inquires into breaches and directs remedies."
+    }
+  ],
+
+  "obligations": [
+    {
+      "id": "notice-consent",
+      "area": "Notice and consent",
+      "provision": "Sections 5, 6; Rule 3",
+      "universal": true,
+      "summary": "Itemised, plain-language notice. Consent must be free, specific, informed, unconditional, and revocable.",
+      "requirements": [
+        "Itemised list of every personal data category collected",
+        "The specific purpose for each category",
+        "How to withdraw consent, as easily as it was given",
+        "How to lodge a complaint with the Data Protection Board",
+        "Retrospective notice for data processed before commencement"
+      ]
+    },
+    {
+      "id": "purpose-retention",
+      "area": "Purpose limitation and retention",
+      "provision": "Section 8; Rule 8, Third Schedule",
+      "universal": true,
+      "summary": "Data may only be used for the notified purpose, and erased once that purpose is served.",
+      "requirements": [
+        "Defined retention period per data class",
+        "Erasure on purpose completion or consent withdrawal",
+        "Data held by processors must also be erased",
+        "Security logs retained for one year"
+      ]
+    },
+    {
+      "id": "security",
+      "area": "Security safeguards",
+      "provision": "Section 8(5)",
+      "universal": true,
+      "maxPenaltyCrore": 250,
+      "summary": "Reasonable security safeguards, appropriate to the data and its risk. Carries the single highest penalty in the Act.",
+      "requirements": [
+        "Encryption, obfuscation, or masking as appropriate",
+        "Access control and monitoring",
+        "Contractual safeguards flowing down to processors",
+        "Responsibility is retained even where a third party processes"
+      ]
+    },
+    {
+      "id": "breach",
+      "area": "Breach notification",
+      "provision": "Section 8(6); Rule 7",
+      "universal": true,
+      "maxPenaltyCrore": 200,
+      "summary": "Affected individuals and the Board must be notified within 72 hours of a personal data breach.",
+      "requirements": [
+        "Notice to affected data principals without delay",
+        "Notice must state what happened and what the person can do",
+        "Detailed report to the Board within the window",
+        "Detection and escalation tooling needed to make 72 hours realistic"
+      ]
+    },
+    {
+      "id": "children",
+      "area": "Children's data",
+      "provision": "Section 9; Rule 10",
+      "universal": false,
+      "trigger": "Knowingly processing personal data of anyone under 18",
+      "maxPenaltyCrore": 200,
+      "summary": "Verifiable parental consent before processing, plus an absolute prohibition on tracking and behavioural advertising to children.",
+      "requirements": [
+        "Verifiable parental or guardian consent, with approved verification methods including DigiLocker",
+        "No tracking, monitoring, or behavioural profiling of children — prohibited even with consent",
+        "No behaviourally targeted advertising directed at children",
+        "Equivalent guardian consent for persons with disabilities who have a lawful guardian"
+      ],
+      "exemptions": [
+        "Child-protection legal functions",
+        "Subsidy, benefit, or service delivery, to the extent necessary",
+        "Healthcare and educational services",
+        "Email account creation"
+      ]
+    },
+    {
+      "id": "sdf",
+      "area": "Significant Data Fiduciary duties",
+      "provision": "Section 10; Rule 13",
+      "universal": false,
+      "trigger": "Designation based on volume and sensitivity of data, risk to data principals, and impact on sovereignty or public order",
+      "maxPenaltyCrore": 150,
+      "summary": "Enhanced governance obligations for entities designated as significant.",
+      "requirements": [
+        "Annual Data Protection Impact Assessment",
+        "Annual independent audit",
+        "Algorithmic fairness assessment for systems that could pose risk to data principals",
+        "Appointment of a Data Protection Officer based in India"
+      ]
+    },
+    {
+      "id": "rights",
+      "area": "Data principal rights and grievance redressal",
+      "provision": "Sections 11-14",
+      "universal": true,
+      "summary": "Individuals can access, correct, and erase their data, and must have a route to complain.",
+      "requirements": [
+        "Access to a summary of data held and processing performed",
+        "Correction, completion, and erasure on request",
+        "Published grievance redressal mechanism and response timeline",
+        "Named point of contact for data queries"
+      ]
+    },
+    {
+      "id": "crossborder",
+      "area": "Cross-border transfer",
+      "provision": "Section 16",
+      "universal": false,
+      "trigger": "Personal data stored, processed, or shared outside India",
+      "status": "pending",
+      "summary": "The Act permits the government to restrict transfers to notified territories. Operational detail is not yet notified.",
+      "requirements": [
+        "Track notifications rather than pre-emptively restructure",
+        "Map current data flows so a future restriction can be actioned quickly"
+      ]
+    },
+    {
+      "id": "ai-governance",
+      "area": "AI-specific governance",
+      "provision": "MeitY India AI Governance Guidelines; IT Amendment Rules 2026",
+      "universal": false,
+      "trigger": "System uses AI or generates synthetic content",
+      "summary": "Voluntary principles, plus binding rules on synthetically generated content and deepfake labelling.",
+      "requirements": [
+        "Labelling and metadata for AI-generated content",
+        "Explainability proportionate to the decision's impact",
+        "Documented accountability for automated decisions",
+        "Human review pathway where decisions materially affect a person"
+      ]
+    }
+  ],
+
+  "penalties": [
+    { "provision": "Section 8(5)", "breach": "Failure to implement reasonable security safeguards", "maxCrore": 250 },
+    { "provision": "Section 8(6)", "breach": "Failure to notify the Board or data principals of a breach", "maxCrore": 200 },
+    { "provision": "Section 9", "breach": "Non-compliance with children's data provisions", "maxCrore": 200 },
+    { "provision": "Section 10", "breach": "Failure to fulfil Significant Data Fiduciary obligations", "maxCrore": 150 },
+    { "provision": "Section 15", "breach": "Failure by a data principal to observe their duties", "maxRupees": 10000 }
+  ],
+
+  "timeline": [
+    { "date": "2023-08", "event": "DPDP Act receives presidential assent", "status": "done" },
+    { "date": "2025-11-13", "event": "DPDP Rules 2025 notified; Data Protection Board established", "status": "done" },
+    { "date": "2025-11", "event": "MeitY publishes India AI Governance Guidelines", "status": "done" },
+    { "date": "2026-02-10", "event": "IT Amendment Rules on synthetically generated content notified", "status": "done" },
+    { "date": "2027-05-14", "event": "Full DPDP obligations in force", "status": "upcoming" }
+  ],
+
+  "unsettled": [
+    "Sensitive personal data categories await a separate Central Government notification.",
+    "Cross-border transfer restrictions remain deferred to future notification.",
+    "SDF designation criteria are set, but the list of designated entities is not yet published."
+  ]
+}

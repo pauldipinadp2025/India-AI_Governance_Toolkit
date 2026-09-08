@@ -2,7 +2,7 @@
   "meta": {
     "name": "India AI Governance & DPDP Knowledge Base",
     "version": "1.0.0",
-    "lastReviewed": "2026-09",
+    "lastReviewed": "2026-09-08",
     "disclaimer": "Reference material for preliminary assessment. Not legal advice.",
     "sources": [
       {
@@ -38,9 +38,9 @@
         "publisher": "Chaired by Yoshua Bengio; 30+ nominating states",
         "note": "Multilateral risk assessment; used for the safety-vs-governance framing."
       }
-    ]
+    ],
+    "verificationNote": "Rules 1-16 and Schedules read from gazette notification G.S.R. 846(E), Gazette of India No. 760, 13 November 2025. Penalty caps read from the Schedule to section 33(1) of the DPDP Act 2023 as published on meity.gov.in."
   },
-
   "concepts": {
     "governance": {
       "shortLabel": "The rulebook",
@@ -65,17 +65,43 @@
       "relationship": "Safety research produces the measurement and testing methods that governance rules depend on. You cannot regulate what you cannot evaluate."
     }
   },
-
   "sutras": [
-    { "n": 1, "name": "Trust", "gloss": "AI systems should earn confidence through consistent, predictable behaviour." },
-    { "n": 2, "name": "People-first governance", "gloss": "Human wellbeing is the yardstick, not adoption speed for its own sake." },
-    { "n": 3, "name": "Innovation over restraint", "gloss": "Default to enabling development, with targeted safeguards rather than blanket limits." },
-    { "n": 4, "name": "Fairness and equity", "gloss": "Systems should not concentrate benefit or harm unevenly across groups." },
-    { "n": 5, "name": "Accountability", "gloss": "Someone identifiable owns the outcome of every deployed system." },
-    { "n": 6, "name": "Understandability by design", "gloss": "Systems should be explainable to the people they affect." },
-    { "n": 7, "name": "Safety, resilience, sustainability", "gloss": "Systems should hold up under stress, misuse, and long-term operation." }
+    {
+      "n": 1,
+      "name": "Trust",
+      "gloss": "AI systems should earn confidence through consistent, predictable behaviour."
+    },
+    {
+      "n": 2,
+      "name": "People-first governance",
+      "gloss": "Human wellbeing is the yardstick, not adoption speed for its own sake."
+    },
+    {
+      "n": 3,
+      "name": "Innovation over restraint",
+      "gloss": "Default to enabling development, with targeted safeguards rather than blanket limits."
+    },
+    {
+      "n": 4,
+      "name": "Fairness and equity",
+      "gloss": "Systems should not concentrate benefit or harm unevenly across groups."
+    },
+    {
+      "n": 5,
+      "name": "Accountability",
+      "gloss": "Someone identifiable owns the outcome of every deployed system."
+    },
+    {
+      "n": 6,
+      "name": "Understandability by design",
+      "gloss": "Systems should be explainable to the people they affect."
+    },
+    {
+      "n": 7,
+      "name": "Safety, resilience, sustainability",
+      "gloss": "Systems should hold up under stress, misuse, and long-term operation."
+    }
   ],
-
   "institutions": [
     {
       "name": "IndiaAI Mission",
@@ -103,7 +129,6 @@
       "description": "Statutory body established alongside the 2025 Rules; inquires into breaches and directs remedies."
     }
   ],
-
   "obligations": [
     {
       "id": "notice-consent",
@@ -152,12 +177,12 @@
       "provision": "Section 8(6); Rule 7",
       "universal": true,
       "maxPenaltyCrore": 200,
-      "summary": "Affected individuals and the Board must be notified within 72 hours of a personal data breach.",
+      "summary": "Affected individuals and the Board must be notified without delay; a detailed report must reach the Board within 72 hours of becoming aware.",
       "requirements": [
-        "Notice to affected data principals without delay",
-        "Notice must state what happened and what the person can do",
-        "Detailed report to the Board within the window",
-        "Detection and escalation tooling needed to make 72 hours realistic"
+        "Notice to each affected data principal without delay",
+        "Initial intimation to the Board without delay, covering nature, extent, timing and likely impact",
+        "Detailed report to the Board within 72 hours of awareness, extendable on written request",
+        "The clock starts at awareness, not at completion of investigation"
       ]
     },
     {
@@ -175,11 +200,14 @@
         "Equivalent guardian consent for persons with disabilities who have a lawful guardian"
       ],
       "exemptions": [
-        "Child-protection legal functions",
-        "Subsidy, benefit, or service delivery, to the extent necessary",
-        "Healthcare and educational services",
-        "Email account creation"
-      ]
+        "Clinical establishments, mental health establishments, and healthcare professionals, limited to health services necessary to protect the child",
+        "Allied healthcare professionals supporting a recommended treatment or referral plan",
+        "Educational institutions, limited to tracking and behavioural monitoring for educational activities or child safety",
+        "Crèches and child day care centres, limited to safety of children in their care",
+        "School transport providers, limited to location tracking during travel",
+        "Purposes: statutory duties in a child’s interest, subsidy or benefit delivery, email account creation, real-time location for safety, blocking harmful content or advertising, and age confirmation under Rule 10"
+      ],
+      "exemptionsNote": "Rule 12 read with the Fourth Schedule disapplies section 9(1) and 9(3) for listed classes and purposes. Section 9(2), the detrimental-effect prohibition, is never exempted."
     },
     {
       "id": "sdf",
@@ -203,10 +231,10 @@
       "universal": true,
       "summary": "Individuals can access, correct, and erase their data, and must have a route to complain.",
       "requirements": [
-        "Access to a summary of data held and processing performed",
-        "Correction, completion, and erasure on request",
-        "Published grievance redressal mechanism and response timeline",
-        "Named point of contact for data queries"
+        "Published means for making a rights request",
+        "Grievance redressal system with a response period not exceeding ninety days (Rule 14(3))",
+        "Named contact able to answer processing questions (Rule 9)",
+        "Ability to nominate another person to exercise rights"
       ]
     },
     {
@@ -237,26 +265,86 @@
       ]
     }
   ],
-
   "penalties": [
-    { "provision": "Section 8(5)", "breach": "Failure to implement reasonable security safeguards", "maxCrore": 250 },
-    { "provision": "Section 8(6)", "breach": "Failure to notify the Board or data principals of a breach", "maxCrore": 200 },
-    { "provision": "Section 9", "breach": "Non-compliance with children's data provisions", "maxCrore": 200 },
-    { "provision": "Section 10", "breach": "Failure to fulfil Significant Data Fiduciary obligations", "maxCrore": 150 },
-    { "provision": "Section 15", "breach": "Failure by a data principal to observe their duties", "maxRupees": 10000 }
+    {
+      "sl": 1,
+      "provision": "Section 8(5)",
+      "breach": "Failure to take reasonable security safeguards to prevent a personal data breach",
+      "maxCrore": 250
+    },
+    {
+      "sl": 2,
+      "provision": "Section 8(6)",
+      "breach": "Failure to give the Board or affected Data Principal notice of a personal data breach",
+      "maxCrore": 200
+    },
+    {
+      "sl": 3,
+      "provision": "Section 9",
+      "breach": "Breach of additional obligations in relation to children",
+      "maxCrore": 200
+    },
+    {
+      "sl": 4,
+      "provision": "Section 10",
+      "breach": "Breach of additional obligations of a Significant Data Fiduciary",
+      "maxCrore": 150
+    },
+    {
+      "sl": 5,
+      "provision": "Section 15",
+      "breach": "Breach of the duties of a Data Principal",
+      "maxRupees": 10000
+    },
+    {
+      "sl": 6,
+      "provision": "Section 32",
+      "breach": "Breach of any term of a voluntary undertaking accepted by the Board",
+      "note": "Up to the extent applicable to the breach for which section 28 proceedings were instituted"
+    },
+    {
+      "sl": 7,
+      "provision": "Residual",
+      "breach": "Breach of any other provision of the Act or the Rules",
+      "maxCrore": 50
+    }
   ],
-
   "timeline": [
-    { "date": "2023-08", "event": "DPDP Act receives presidential assent", "status": "done" },
-    { "date": "2025-11-13", "event": "DPDP Rules 2025 notified; Data Protection Board established", "status": "done" },
-    { "date": "2025-11", "event": "MeitY publishes India AI Governance Guidelines", "status": "done" },
-    { "date": "2026-02-10", "event": "IT Amendment Rules on synthetically generated content notified", "status": "done" },
-    { "date": "2027-05-14", "event": "Full DPDP obligations in force", "status": "upcoming" }
+    {
+      "date": "2023-08",
+      "event": "DPDP Act receives presidential assent",
+      "status": "done"
+    },
+    {
+      "date": "2025-11-13",
+      "event": "DPDP Rules 2025 notified; Data Protection Board established",
+      "status": "done"
+    },
+    {
+      "date": "2025-11",
+      "event": "MeitY publishes India AI Governance Guidelines",
+      "status": "done"
+    },
+    {
+      "date": "2026-02-10",
+      "event": "IT Amendment Rules on synthetically generated content notified",
+      "status": "done"
+    },
+    {
+      "date": "2026-11",
+      "event": "Consent Manager registration obligations commence",
+      "status": "upcoming"
+    },
+    {
+      "date": "2027-05",
+      "event": "Full DPDP obligations in force (computed as 13 May 2027)",
+      "status": "upcoming"
+    }
   ],
-
   "unsettled": [
     "Sensitive personal data categories await a separate Central Government notification.",
-    "Cross-border transfer restrictions remain deferred to future notification.",
-    "SDF designation criteria are set, but the list of designated entities is not yet published."
+    "Cross-border transfer requirements under Rule 15 depend on future general or special orders of the Central Government.",
+    "SDF designation criteria are set, but the list of designated entities is not yet published.",
+    "The commencement date is computed as eighteen months from gazette publication on 13 November 2025."
   ]
 }

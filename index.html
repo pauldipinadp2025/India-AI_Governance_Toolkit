@@ -442,7 +442,7 @@ footer .legal{font-size:12px;color:#6E7C8B;padding-top:18px;line-height:1.65;mar
     <div class="card">
       <h4 style="font-size:17px;margin-bottom:12px;">Method and limits</h4>
       <p class="prose" style="font-size:14px;color:var(--inkSoft);margin:0 0 13px;">The rule engine encodes obligations directly from the statutory text and the 2025 Rules. Where the law is silent or pending notification, the tool states this in its output rather than inferring a position. Scoring weights reflect the author's judgement, calibrated against the penalty schedule, and each deduction is displayed alongside its finding so the reasoning can be examined and disputed.</p>
-      <p class="prose" style="font-size:14px;color:var(--inkSoft);margin:0;">Last reviewed against the sources above in September 2026. The framework remains mid-transition, with full obligations in force from 14 May 2027, so findings reflect the position at the review date rather than necessarily the position today.</p>
+      <p class="prose" style="font-size:14px;color:var(--inkSoft);margin:0;">Rules 1 to 16 and the Schedules were read directly from gazette notification G.S.R. 846(E) on 8 September 2026. The penalty caps were read from the Schedule to section 33(1) of the Act as published on meity.gov.in. The framework remains mid-transition, with full obligations in force from May 2027, so findings reflect the position at the review date rather than necessarily the position today.</p>
     </div>
   </div>
 </div>
@@ -459,9 +459,9 @@ footer .legal{font-size:12px;color:#6E7C8B;padding-top:18px;line-height:1.65;mar
         </svg>
         Runs entirely in your browser. Nothing you enter is sent anywhere.
       </div>
-      <div class="foot-rev">Last reviewed September 2026</div>
+      <div class="foot-rev">Verified against the Act and G.S.R. 846(E) · 8 Sep 2026</div>
     </div>
-    <p class="legal prose">This tool produces a preliminary signal intended for triage and internal discussion. It is not legal advice and does not substitute for review by a qualified practitioner. Full DPDP obligations phase in to 14 May 2027. Sensitive personal data categories and cross-border transfer restrictions remain pending government notification.</p>
+    <p class="legal prose">This tool produces a preliminary signal intended for triage and internal discussion. It is not legal advice and does not substitute for review by a qualified practitioner. Full DPDP obligations phase in during May 2027. Sensitive personal data categories and cross-border transfer restrictions remain pending government notification.</p>
   </div>
 </footer>
 
@@ -494,14 +494,17 @@ const TIMELINE = [
   ["13 Nov 2025","DPDP Rules 2025 notified","Operational detail lands; Data Protection Board established.",0],
   ["Nov 2025","MeitY AI Governance Guidelines","Seven principles, voluntary in nature. No standalone AI statute.",0],
   ["10 Feb 2026","IT Amendment Rules","Binding rules on synthetic content and deepfake labelling.",0],
-  ["14 May 2027","Full DPDP obligations in force","The end of the phased compliance runway.",1]
+  ["Nov 2026","Consent Manager registration","Registration obligations for Consent Managers commence.",0],
+  ["May 2027","Full DPDP obligations in force","Eighteen months from notification, computed as 13 May 2027. The gazette publication date is itself disputed, so treat this as approximate.",1]
 ];
 
 const PENALTIES = [
   ["Failure to implement reasonable security safeguards","Section 8(5)","₹250 cr"],
   ["Failure to notify a personal data breach","Section 8(6)","₹200 cr"],
   ["Non-compliance with children's data provisions","Section 9","₹200 cr"],
-  ["Failure to meet Significant Data Fiduciary duties","Section 10","₹150 cr"]
+  ["Failure to meet Significant Data Fiduciary duties","Section 10","₹150 cr"],
+  ["Breach of any other provision of the Act or Rules","Residual entry","₹50 cr"],
+  ["Breach of a data principal's own duties","Section 15","₹10,000"]
 ];
 
 const DATA_CATS = [
@@ -533,8 +536,8 @@ const SAFEGUARDS = [
 
 const SOURCES = {
   primary:[
-    ["Digital Personal Data Protection Act, 2023","Parliament of India","Assented August 2023","The operative statute. Sections 5 to 16 supply the obligation structure used throughout the Assess module."],
-    ["Digital Personal Data Protection Rules, 2025","MeitY","Notified 13 November 2025","Operational detail: Rule 3 notice content, Rule 7 breach reporting, Rule 10 parental consent verification, Rule 13 SDF duties."],
+    ["Digital Personal Data Protection Act, 2023","Parliament of India (22 of 2023)","Read from meity.gov.in","The operative statute. Sections 5 to 16 supply the obligation structure; the Schedule to section 33(1) supplies the penalty caps shown in the Learn module."],
+    ["Digital Personal Data Protection Rules, 2025","MeitY, G.S.R. 846(E)","Gazette No. 760, 13 November 2025","Read directly. Rule 3 notice content, Rule 6 security minimums, Rule 7 breach timelines, Rule 8 retention, Rule 10 parental consent, Rule 12 and Fourth Schedule exemptions, Rule 13 SDF duties, Rule 14 grievance period."],
     ["IT Amendment Rules, synthetically generated content","MeitY","Notified 10 February 2026","Binding labelling and metadata obligations for AI-generated content."]
   ],
   policy:[
@@ -606,7 +609,7 @@ function assess(s){
     if(gaps.length){
       F.push(cut(gaps.length*13,{
         sev:"critical", area:"Children's data", prov:"Section 9 / Rule 10",
-        text:`You process data of users under 18 but have not confirmed ${gaps.join(" or ")}. Rule 10 requires verifiable parental consent, with approved verification methods including DigiLocker. Tracking, profiling, and behaviourally targeted advertising to children are prohibited outright. Consent does not cure this.`,
+        text:`You process data of users under 18 but have not confirmed ${gaps.join(" or ")}. Rule 10 requires verifiable parental consent, verified either from identity and age details the fiduciary already holds, or from details voluntarily provided, including via a virtual token from a Digital Locker service provider. Section 9(3) bars tracking, behavioural monitoring, and targeted advertising directed at children, and consent does not cure it. Rule 12 exempts specific classes and purposes, so check the Fourth Schedule before assuming it applies to you.`,
         action:"Build the parental consent flow and disable all behavioural targeting for under-18 accounts."
       }));
     } else {

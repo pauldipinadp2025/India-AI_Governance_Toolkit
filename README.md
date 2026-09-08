@@ -1,4 +1,4 @@
-<img width="939" height="493" alt="image" src="https://github.com/user-attachments/assets/da20e97b-8dad-4fc4-8c67-532499496f45" /># India AI Governance Toolkit
+# India AI Governance Toolkit
 
 A four-module tool for working with India's data protection and AI governance rules: learn the framework, assess a product against it, generate a draft privacy notice from the result, and check the sources behind every claim.
 

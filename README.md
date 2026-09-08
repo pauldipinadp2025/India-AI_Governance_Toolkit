@@ -1,10 +1,10 @@
-# India AI Governance Toolkit
+<img width="939" height="493" alt="image" src="https://github.com/user-attachments/assets/da20e97b-8dad-4fc4-8c67-532499496f45" /># India AI Governance Toolkit
 
 A four-module tool for working with India's data protection and AI governance rules: learn the framework, assess a product against it, generate a draft privacy notice from the result, and check the sources behind every claim.
 
 Built on the Digital Personal Data Protection Act 2023, the DPDP Rules 2025 (notified 13 November 2025), MeitY's India AI Governance Guidelines, and the IT Amendment Rules 2026.
 
-**Live tool:** https://YOUR-USERNAME.github.io/india-ai-governance-toolkit/
+**Live tool:** https://pauldipinadp2025.github.io/India-AI_Governance_Toolkit/
 
 ---
 
